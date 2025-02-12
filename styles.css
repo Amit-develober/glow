@@ -7,80 +7,175 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #111;
-    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: 'Poppins', Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, #000 100%);
+    opacity: 0.7;
+    z-index: 0;
 }
 
 .container {
     text-align: center;
     padding: 2rem;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    max-width: 1400px;
+    width: 90%;
+    margin: 2rem;
 }
 
 /* Rainbow Text Animation */
 @keyframes rainbow-text {
-    0% { color: #ff0000; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
-    16% { color: #ff8800; text-shadow: 0 0 10px #ff8800, 0 0 20px #ff8800; }
-    32% { color: #ffff00; text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00; }
-    48% { color: #00ff00; text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
-    64% { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
-    80% { color: #0000ff; text-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff; }
-    100% { color: #ff00ff; text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+    0% { color: #ff0000; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; }
+    16% { color: #ff8800; text-shadow: 0 0 10px #ff8800, 0 0 20px #ff8800, 0 0 30px #ff8800; }
+    32% { color: #ffff00; text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00; }
+    48% { color: #00ff00; text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; }
+    64% { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }
+    80% { color: #0000ff; text-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff, 0 0 30px #0000ff; }
+    100% { color: #ff00ff; text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; }
 }
 
 .rainbow-text {
-    font-size: 3.5rem;
+    font-size: 4rem;
+    font-weight: 700;
     margin-bottom: 3rem;
     animation: rainbow-text 5s linear infinite;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.rainbow-text::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+    border-radius: 3px;
 }
 
 .projects-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .project-item {
     text-decoration: none;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
 .project-item:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px) scale(1.02);
 }
 
 .icon-container {
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 20px;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    transform: rotate(0deg);
+    transition: transform 0.6s ease;
+}
+
+.icon-container:hover::before {
+    transform: rotate(180deg);
+}
+
+.circle-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .project-icon {
     font-size: 2.5rem;
     z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover .project-icon {
+    transform: rotate(360deg);
 }
 
 .project-title {
-    margin: 0;
-    font-size: 1.2rem;
+    margin: 1rem 0 0;
+    font-size: 1.3rem;
     color: white;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-/* Glow Colors */
+.project-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+}
+
+.project-item:hover .project-title::after {
+    width: 50px;
+}
+
+/* Glow Colors with enhanced effects */
 .red-glow {
     color: #ff0000;
 }
 
 .red-glow:hover {
-    box-shadow: 0 0 15px #ff0000,
-                0 0 30px #ff0000;
+    box-shadow: 0 0 20px #ff0000,
+                0 0 40px rgba(255, 0, 0, 0.5);
 }
 
 .orange-glow {
@@ -88,8 +183,8 @@ body {
 }
 
 .orange-glow:hover {
-    box-shadow: 0 0 15px #ff8800,
-                0 0 30px #ff8800;
+    box-shadow: 0 0 20px #ff8800,
+                0 0 40px rgba(255, 136, 0, 0.5);
 }
 
 .green-glow {
@@ -97,48 +192,40 @@ body {
 }
 
 .green-glow:hover {
-    box-shadow: 0 0 15px #00ff00,
-                0 0 30px #00ff00;
+    box-shadow: 0 0 20px #00ff00,
+                0 0 40px rgba(0, 255, 0, 0.5);
 }
 
-.purple-glow {
-    color: #ff00ff;
-}
-
-.purple-glow:hover {
-    box-shadow: 0 0 15px #ff00ff,
-                0 0 30px #ff00ff;
-}
-
-/* Hover Animation */
-@keyframes floating {
+/* Add floating animation */
+@keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0px); }
 }
 
-.icon-container:hover {
-    animation: floating 2s ease-in-out infinite;
+.project-item {
+    animation: float 4s ease-in-out infinite;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-    }
+/* Add subtle particle effect */
+@keyframes particle {
+    0% { transform: translate(0, 0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translate(100px, -100px); opacity: 0; }
+}
 
-    .rainbow-text {
-        font-size: 2.5rem;
-    }
-
-    .icon-container {
-        padding: 1.5rem;
-    }
-
-    .project-icon {
-        font-size: 2.5rem;
-    }
+.container::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: particle 8s linear infinite;
+    opacity: 0.1;
 }
 
 .social-icons {
@@ -356,7 +443,7 @@ body {
 /* Updated Rainbow Text with Stroke */
 .stroke-text {
     -webkit-text-stroke: 2px #fff;
-    text-stroke: 2px #fff;
+    text-wrap-style: 2px #fff;
     font-weight: bold;
 }
 
@@ -459,6 +546,129 @@ body {
     
     .stroke-text {
         -webkit-text-stroke: 1px #fff;
-        text-stroke: 1px #fff;
+        text-wrap-style: 1px #fff;
     }
-} 
+}
+
+/* Add responsive design for mobile devices */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        margin: 1rem;
+        width: 95%;
+    }
+
+    .rainbow-text {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .icon-container {
+        padding: 2rem;
+    }
+
+    .circle-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .project-icon {
+        font-size: 2rem;
+    }
+
+    .project-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 0.8rem;
+        margin: 0.8rem;
+    }
+
+    .rainbow-text {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .icon-container {
+        padding: 1.5rem;
+    }
+
+    .circle-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .project-icon {
+        font-size: 1.8rem;
+    }
+
+    .project-title {
+        font-size: 1rem;
+        margin-top: 0.8rem;
+    }
+
+    /* Adjust animations for better performance on mobile */
+    .project-item {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .icon-container::before {
+        display: none; /* Remove complex animations on mobile for better performance */
+    }
+
+    body::before {
+        opacity: 0.5; /* Reduce background overlay opacity for better visibility */
+    }
+}
+
+/* Fix for mobile touch devices */
+@media (hover: none) {
+    .project-item:hover {
+        transform: none;
+    }
+
+    .icon-container:hover::before {
+        transform: none;
+    }
+
+    .project-item:hover .project-icon {
+        transform: none;
+    }
+
+    .project-title::after {
+        display: none;
+    }
+
+    /* Add active state for touch devices */
+    .project-item:active {
+        transform: scale(0.98);
+    }
+
+    .icon-container {
+        transition: transform 0.3s ease;
+    }
+
+    .icon-container:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Ensure text remains readable on all devices */
+.project-title {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Improve touch target sizes for mobile */
+.project-item {
+    min-height: 120px;
+    touch-action: manipulation;
+}
