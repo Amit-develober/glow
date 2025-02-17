@@ -7,7 +7,9 @@
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    background: linear-gradient(135deg, #000000, #000080, #ff69b4);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     font-family: 'Poppins', Arial, sans-serif;
     min-height: 100vh;
     display: flex;
@@ -17,13 +19,20 @@ body {
     overflow-x: hidden;
 }
 
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 body::before {
     content: '';
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, transparent 20%, #000 100%);
-    opacity: 0.7;
+    background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.7));
     z-index: 0;
 }
 
@@ -97,23 +106,15 @@ body::before {
     padding: 2.5rem;
     border-radius: 20px;
     transition: all 0.4s ease;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 51, 0.2);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 51, 0.3);
     position: relative;
     overflow: hidden;
 }
 
 .icon-container::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    transform: rotate(0deg);
-    transition: transform 0.6s ease;
+    display: none;
 }
 
 .icon-container:hover::before {
@@ -197,35 +198,17 @@ body::before {
 }
 
 /* Add floating animation */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
 .project-item {
-    animation: float 4s ease-in-out infinite;
+    animation: none;
 }
 
 /* Add subtle particle effect */
 @keyframes particle {
-    0% { transform: translate(0, 0); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translate(100px, -100px); opacity: 0; }
+    display: none;
 }
 
 .container::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: particle 8s linear infinite;
-    opacity: 0.1;
+    display: none;
 }
 
 .social-icons {
@@ -618,7 +601,7 @@ body::before {
 
     /* Adjust animations for better performance on mobile */
     .project-item {
-        animation: float 6s ease-in-out infinite;
+        animation: none;
     }
 
     .icon-container::before {
